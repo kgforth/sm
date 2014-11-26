@@ -432,7 +432,7 @@ USER-VALUE /u,/
   2DUP TO /u,/ TO  /a,/ + 1- C@ [CHAR] , = 
   IF /a,/ buffstr dpstr + /u,/ 1- MOVE dpstr /u,/ 1- + TO dpstr 1 TO flsym?
   ELSE flsym?  
-       IF  0 TO flsym? /a,/ buffstr dpstr + /u,/ MOVE dpstr /u,/ + TO dpstr buffstr dpstr NOTFOUND  0 TO dpstr EXIT 
+       IF  0 TO flsym? /a,/ buffstr dpstr + /u,/ MOVE dpstr /u,/ + TO dpstr buffstr dpstr 1- NOTFOUND  0 TO dpstr EXIT 
        ELSE 0 TO flsym? /a,/ /u,/ NOTFOUND  0 TO dpstr EXIT THEN
   THEN ; 
 
