@@ -33,28 +33,19 @@ USER /org USER /beg USER /cur USER /lim USER /a/ USER /u/    VECT sm,
 \ непосредственно установка рабочего буфера(кадра) ( 0 d!, 1 d! ...9 d! ):
 : d! ( n -- ) 256 * CELLS /d0/ + /d/ ! ;  
 
-\ ============================================
-
-: [org] ( char -- org ) 255 SWAP - CELLS ;
-
-\ ============================================
-
 \ вспомагательные слова
 : dg? ( a -- f ) C@ [CHAR] 0 [CHAR] 9 1+ WITHIN  ;
 : az? ( a -- f ) C@ [CHAR] a [CHAR] z 1+ WITHIN  ;
 : AZ? ( a -- f ) C@ [CHAR] A [CHAR] Z 1+ WITHIN  ;
 
 : vec? ( a -- f ) DUP dg? OVER az? OR SWAP AZ? OR 0= ;
-
-: [c,] ( C -- ) [org] LIT, ;
-
-: [d,]  ['] /d/ COMPILE, ['] @ COMPILE, ['] + COMPILE, ; 
-
-: [p,]  2- LIT, ['] PICK COMPILE, ; 
-
-: [@,]  /cur @ C@ [org] LIT, [d,] ['] @ COMPILE, ;
-
 : num? ( a u -- f ) OVER DUP dg? SWAP C@ [CHAR] - = OR -ROT OVER SWAP 1 D+ ?DO I dg? AND LOOP ;
+
+: [org] ( char -- org ) 255 SWAP - CELLS ;
+: [c,] ( C -- ) [org] LIT, ;
+: [d,]  ['] /d/ COMPILE, ['] @ COMPILE, ['] + COMPILE, ; 
+: [p,]  2- LIT, ['] PICK COMPILE, ; 
+: [@,]  /cur @ C@ [org] LIT, [d,] ['] @ COMPILE, ;
 
 \ Lambda. код внутри конструкции LAMBDA{  }LAMBDA не выполняется, возвращается xt на этот код.   
 
